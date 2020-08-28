@@ -1,0 +1,89 @@
+#:kivy 1.0
+#:import utils kivy.utils
+
+<ValuesGridLayout@GridLayout>:
+	cols: 1
+    row_default_height: 30
+    size_hint_y: None
+    height: self.minimum_height
+    spacing: 3
+
+<MainPanelLabel@Label>:
+	text_size: self.size
+    valign: "middle"
+	padding_x: 5
+	text: "Some content"
+
+<MainPanel>:
+	kinetic_container: kinetic_container
+	thread_container: thread_container
+	padding: 20, 20, 20, 0
+	BoxLayout:
+		orientation: 'vertical'
+	    BoxLayout:
+	        ScrollView:
+	        	GridLayout:
+	        		padding: [0, 10]
+	        		cols: 1
+				    spacing: 30
+				    size_hint_y: None
+			        height: self.minimum_height
+
+# Kinetic parameters block starts
+
+					BoxLayout:
+						CheckBox:
+							size_hint: (None, None)
+							size: [20,20]
+				            on_active:
+				            	root.toggleParameters(self.active, root.kinetic_container)
+
+						MainPanelLabel:
+		        			text: "Kinetic values:"
+		        			color: utils.get_color_from_hex('#f6711b')
+		        			font_size: '20sp'
+
+			        ValuesGridLayout:
+			        	id: kinetic_container
+			        	visible: False
+			            size: [500, 200] if self.visible else [0, 0]
+			            opacity: 1 if self.visible else 0
+			            disabled: not self.visible
+
+			            MainPanelLabel
+				        MainPanelLabel
+				        MainPanelLabel
+				        MainPanelLabel
+				        MainPanelLabel
+				        MainPanelLabel
+
+# Kinetic parameters block ends
+# Tread parameters block starts
+
+					BoxLayout:
+						CheckBox:
+							padding: 20
+							size_hint: (None, None)
+							size: [20,20]
+				            on_active:
+				                root.toggleParameters(self.active, root.thread_container)
+
+						MainPanelLabel:
+		        			text: "Thread values:"
+		        			color: utils.get_color_from_hex('#f6711b')
+		        			font_size: '20sp'
+
+	        		ValuesGridLayout:
+			        	id: thread_container
+			        	visible: False
+			            size: [500, 200] if self.visible else [0, 0]
+			            opacity: 1 if self.visible else 0
+			            disabled: not self.visible
+
+				        MainPanelLabel
+				        MainPanelLabel
+				        MainPanelLabel
+				        MainPanelLabel
+				        MainPanelLabel
+
+# Tread parameters block ends
